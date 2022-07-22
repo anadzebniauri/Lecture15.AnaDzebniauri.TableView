@@ -7,11 +7,18 @@
 
 import UIKit
 
-class MovieCell: UITableViewCell {
+protocol MovieCellDelegate {
+    func moveToListBtn(_ cell: MovieCell)
+}
 
+class MovieCell: UITableViewCell {
+    
+    var delegate: MovieCellDelegate?
+    
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var imdb: UILabel!
-    @IBOutlet weak var moveToWatchlist: UIButton!
+    @IBOutlet weak var moveToListBtn: UIButton!
+    
     
     
     override func awakeFromNib() {
@@ -24,7 +31,9 @@ class MovieCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
-    @IBAction func moveToWatchlist(_ sender: Any) {
+    
+    @IBAction func moveToListBtn(_ sender: Any) {
+        delegate!.moveToListBtn(self)
+        }
     }
-}
+
